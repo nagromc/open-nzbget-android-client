@@ -1,0 +1,81 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="com.github.nagromc.nzbgetclient.DebugActivity" >
+
+            <Button
+                android:id="@+id/button_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getVersion"
+                android:text="@string/button_version_label" />
+
+            <Button
+                android:id="@+id/button_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_version"
+                android:onClick="getLog"
+                android:text="@string/button_log_label" />
+
+            <Button
+                android:id="@+id/button_pausedonwload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_log"
+                android:onClick="getPauseDownload"
+                android:text="@string/button_pausedownload_label" />
+
+            <Button
+                android:id="@+id/button_resumedonwload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_pausedonwload"
+                android:onClick="getResumeDownload"
+                android:text="@string/button_resumedownload_label" />
+
+            <Button
+                android:id="@+id/button_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_resumedonwload"
+                android:onClick="getStatus"
+                android:text="@string/button_status_label" />
+
+            <Button
+                android:id="@+id/button_listgroups"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_status"
+                android:onClick="getListGroups"
+                android:text="@string/button_listgroups_label" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2" >
+
+        <TextView
+            android:id="@+id/textView_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+</LinearLayout>

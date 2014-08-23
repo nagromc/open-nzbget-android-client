@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NZBGetAndroidClient</string>
+
+    <string name="title_activity_debug">NZBGetDroid (API Debug)</string>
+
+    <string name="button_version_label">version</string>
+    <string name="button_log_label">log</string>
+    <string name="button_pausedownload_label">pausedownload</string>
+    <string name="button_resumedownload_label">resumedownload</string>
+    <string name="button_status_label">status</string>
+    <string name="button_listgroups_label">listgroups</string>
+
+</resources>

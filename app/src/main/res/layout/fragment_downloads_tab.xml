@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.github.nagromc.nzbgetclient.activity.main.tab.downloads.DownloadsTabFragment">
+
+    <RelativeLayout
+        android:id="@+id/downloadFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom">
+
+        <RelativeLayout
+            android:id="@+id/detailsBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/totalDownloadRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textSize="10dp"
+                android:text="12,42 kB/s"
+                />
+
+            <TextView
+                android:id="@+id/totalEta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="10dp"
+                android:text="2500 MB / 4900MB (13 h 4 min 12 sec)" />
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/totalProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detailsBox"
+            android:progress="50"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/downloadFooter"/>
+
+</RelativeLayout>
