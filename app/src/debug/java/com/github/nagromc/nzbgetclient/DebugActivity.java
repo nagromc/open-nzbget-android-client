@@ -29,6 +29,9 @@ public class DebugActivity extends ActionBarActivity {
 
     public static final String TAG = DebugActivity.class.getName();
 
+    private static final String HOST = "s.ploki.fr";
+    private static final int PORT = 6790;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,8 +108,7 @@ public class DebugActivity extends ActionBarActivity {
 
     private <T> void sendRequest(RequestDto<T> request,
                                  NzbGetListener<T> listener) {
-        NzbGetGsonRequest<T> gsonRequest = new NzbGetGsonRequest<T>(request,
-                request.getResultClass(), listener);
+        NzbGetGsonRequest<T> gsonRequest = new NzbGetGsonRequest<T>(HOST, PORT, request, request.getResultClass(), listener);
 
         VolleySingleton volley = VolleySingleton.getInstance(this);
         volley.getRequestQueue().add(gsonRequest);

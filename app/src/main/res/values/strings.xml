@@ -12,8 +12,20 @@
     <string name="title_tab_downloads">Downloads</string>
     <string name="title_tab_history">History</string>
 
+    <!-- Preferences -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="pref_category_nzbget_server">NZBGet server details</string>
+    <string name="pref_host">Host</string>
+    <string name="pref_host_summ">Current host name: %s</string>
+    <string name="pref_host_summ_empty">Click to set a host name or IP address</string>
+    <string name="pref_host_error_message">\"%s\" is not a valid host name or IP address</string>
+    <string name="pref_port">Port</string>
+    <string name="pref_port_summ">Current port: %s</string>
+    <string name="pref_port_summ_empty">Click to set a port</string>
+    <string name="pref_port_error_message">The entered port \"%1$d\" is not valid (must be between %2$d and %3$d)</string>
+
     <!-- Error messages -->
-    <string name="error_message_unkown">Unknown error</string>
+    <string name="error_message_unkown">Network error. Please check your settings.</string>
     <string name="error_message_unreachable_host">Cannot reach host. Check your settings or your Internet connection.</string>
 
 </resources>

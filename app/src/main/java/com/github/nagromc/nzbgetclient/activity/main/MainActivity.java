@@ -1,6 +1,9 @@
 package com.github.nagromc.nzbgetclient.activity.main;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -11,6 +14,8 @@ import android.view.MenuItem;
 
 import com.github.nagromc.nzbgetclient.R;
 import com.github.nagromc.nzbgetclient.activity.main.tab.MainPagerAdapter;
+import com.github.nagromc.nzbgetclient.activity.settings.SettingsActivity;
+import com.github.nagromc.nzbgetclient.activity.settings.SettingsKeys;
 import com.github.nagromc.nzbgetclient.model.Download;
 import com.github.nagromc.nzbgetclient.model.Status;
 import com.github.nagromc.nzbgetclient.net.VolleySingleton;
@@ -70,6 +75,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         int id = item.getItemId();
         switch (id) {
             case R.id.action_settings:
+                Log.d(TAG, "settings button clicked");
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                 return true;
 
             case R.id.action_refresh:
@@ -102,7 +109,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
     private <T> void sendRequest(RequestDto<T> request, NzbGetListener<T> listener) {
-        NzbGetGsonRequest<T> gsonRequest = new NzbGetGsonRequest<T>(request, request.getResultClass(), listener);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String host = prefs.getString(SettingsKeys.NZBGET_SERVER_HOST, null);
+        String portStr = prefs.getString(SettingsKeys.NZBGET_SERVER_PORT, null);
+        int port = Integer.parseInt(portStr);
+
+        NzbGetGsonRequest<T> gsonRequest = new NzbGetGsonRequest<T>(host, port, request, request.getResultClass(), listener);
 
         VolleySingleton volley = VolleySingleton.getInstance(this);
         volley.getRequestQueue().add(gsonRequest);

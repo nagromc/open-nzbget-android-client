@@ -11,37 +11,37 @@ import java.util.Map;
 
 public class NzbGetGsonRequest<T> extends GsonRequest<ResponseDto<T>> {
 
-	// TODO externalize
-	private static final String SERVER_URL = "http://s.ploki.fr:6790/jsonrpc";
+	private static final String SERVER_URL_PATTERN = "http://%s:%d/jsonrpc";
 	private static final Map<String, String> headers = new HashMap<String, String>();
 
-	public NzbGetGsonRequest(final RequestDto<T> request,
-			final Class<T> resultClass, final NzbGetListener<T> listener) {
+	public NzbGetGsonRequest(final String host, final int port, final RequestDto<T> request, final Class<T> resultClass, final NzbGetListener<T> listener) {
 		// TODO clean up
-		super(SERVER_URL, request, new ParameterizedType() {
-			@Override
-			public Type getRawType() {
-				return ResponseDto.class;
-			}
+		super(String.format(SERVER_URL_PATTERN, host, port),
+                request,
+                new ParameterizedType() {
+                    @Override
+                    public Type getRawType() {
+                        return ResponseDto.class;
+                    }
 
-			@Override
-			public Type getOwnerType() {
-				return null;
-			}
+                    @Override
+                    public Type getOwnerType() {
+                        return null;
+                    }
 
-			@Override
-			public Type[] getActualTypeArguments() {
-				return new Type[] { resultClass };
-			}
-		}, headers, new Listener<ResponseDto<T>>() {
-
-			@Override
-			public void onResponse(ResponseDto<T> response) {
-				listener.onResponse(response.getResult());
-			}
-
-		}, listener);
-
+                    @Override
+                    public Type[] getActualTypeArguments() {
+                        return new Type[] { resultClass };
+                    }
+                },
+                headers,
+                new Listener<ResponseDto<T>>() {
+                    @Override
+                    public void onResponse(ResponseDto<T> response) {
+                        listener.onResponse(response.getResult());
+                    }
+		        },
+                listener);
 	}
 
 }

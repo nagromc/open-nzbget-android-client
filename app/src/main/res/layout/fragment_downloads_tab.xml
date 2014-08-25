@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="com.github.nagromc.nzbgetclient.activity.main.tab.downloads.DownloadsTabFragment">
 
+    <!-- TODO Add text/image if server is not set up -->
+
     <RelativeLayout
         android:id="@+id/downloadFooter"
         android:layout_width="match_parent"

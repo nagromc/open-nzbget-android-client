@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_category_nzbget_server">
+
+        <EditTextPreference
+            android:key="prefs_nzbget_server_host"
+            android:title="@string/pref_host"
+            android:summary="@string/pref_host_summ_empty" />
+        <EditTextPreference
+            android:key="prefs_nzbget_server_port"
+            android:title="@string/pref_port"
+            android:numeric="integer" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
