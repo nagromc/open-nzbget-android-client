@@ -5,30 +5,33 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.github.nagromc.nzbgetclient.NZBGetContext;
 import com.github.nagromc.nzbgetclient.R;
 import com.github.nagromc.nzbgetclient.activity.main.tab.MainPagerAdapter;
 import com.github.nagromc.nzbgetclient.activity.settings.SettingsActivity;
 import com.github.nagromc.nzbgetclient.activity.settings.SettingsKeys;
-import com.github.nagromc.nzbgetclient.model.Download;
-import com.github.nagromc.nzbgetclient.model.Status;
 import com.github.nagromc.nzbgetclient.net.VolleySingleton;
 import com.github.nagromc.nzbgetclient.net.api.listgroups.ListGroupsRequestDto;
+import com.github.nagromc.nzbgetclient.net.api.pausedownload.PauseDownloadRequestDto;
+import com.github.nagromc.nzbgetclient.net.api.resumedownload.ResumeDownloadRequestDto;
 import com.github.nagromc.nzbgetclient.net.api.status.StatusRequestDto;
 import com.github.nagromc.nzbgetclient.net.dto.RequestDto;
 import com.github.nagromc.nzbgetclient.net.listener.ListGroupsListener;
+import com.github.nagromc.nzbgetclient.net.listener.PauseDownloadListener;
+import com.github.nagromc.nzbgetclient.net.listener.ResumeDownloadListener;
 import com.github.nagromc.nzbgetclient.net.listener.StatusListener;
 import com.github.nagromc.nzbgetclient.net.volley.NzbGetGsonRequest;
 import com.github.nagromc.nzbgetclient.net.volley.NzbGetListener;
-
-import java.util.List;
-
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -83,6 +86,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 Log.d(TAG, "refresh button clicked");
                 refresh();
                 return true;
+
+            case R.id.action_toggle_pause_resume:
+                Log.d(TAG, "toggle pause/resume button clicked");
+                togglePauseResume();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -106,6 +114,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         sendRequest(listGroupsRequest, new ListGroupsListener(this));
         sendRequest(statusRequest, new StatusListener(this));
+    }
+
+    private void togglePauseResume() {
+        if (NZBGetContext.getInstance().getStatus().isDownloading()) {
+            sendRequest(new PauseDownloadRequestDto(), new PauseDownloadListener(this));
+        } else {
+            sendRequest(new ResumeDownloadRequestDto(), new ResumeDownloadListener(this));
+        }
     }
 
     private <T> void sendRequest(RequestDto<T> request, NzbGetListener<T> listener) {

@@ -30,16 +30,8 @@ public class NZBGetContext {
         return downloads;
     }
 
-    public void setDownloads(List<Download> downloads) {
-        this.downloads = downloads;
-    }
-
     public Status getStatus() {
         return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
 }
