@@ -1,15 +1,18 @@
 package com.github.nagromc.nzbgetclient;
 
 import com.github.nagromc.nzbgetclient.model.Download;
+import com.github.nagromc.nzbgetclient.model.DownloadItem;
 import com.github.nagromc.nzbgetclient.model.Status;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class NZBGetContext {
+public class NZBGetContext extends Observable implements Observer {
 
     private Status status;
-    private List<Download> downloads;
+    private List<DownloadItem> downloads;
 
     private static NZBGetContext instance;
 
@@ -23,15 +26,28 @@ public class NZBGetContext {
 
     public NZBGetContext() {
         this.status = new Status();
-        this.downloads = new ArrayList<Download>();
+        this.downloads = new ArrayList<DownloadItem>();
+
+        // trigger the observers of NZBGetContext
+        status.addObserver(this);
     }
 
-    public List<Download> getDownloads() {
-        return downloads;
+    @Override
+    public void update(Observable observable, Object data) {
+        instance.setChanged();
+        instance.notifyObservers();
     }
 
     public Status getStatus() {
         return status;
     }
 
+    public List<DownloadItem> getDownloads() {
+        return downloads;
+    }
+
+    public void setDownloads(List<DownloadItem> downloads) {
+        this.downloads = downloads;
+        instance.setChanged();
+    }
 }

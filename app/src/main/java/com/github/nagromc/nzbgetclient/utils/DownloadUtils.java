@@ -11,6 +11,10 @@ public class DownloadUtils {
      * @return
      */
     public static long computeEta(long downloadedSize, long totalSize, long rate) {
+        if (rate == 0) {
+            return 0;
+        }
+
         long remainingSize = totalSize - downloadedSize;
         return remainingSize / rate;
     }
@@ -23,6 +27,10 @@ public class DownloadUtils {
      * @return
      */
     public static int computePercentage(long downloadedSize, long totalSize) {
+        if (totalSize == 0) {
+            return 0;
+        }
+
         return (int) (downloadedSize * 100 / totalSize);
     }
 

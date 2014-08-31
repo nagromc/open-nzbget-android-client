@@ -2,7 +2,9 @@ package com.github.nagromc.nzbgetclient.model;
 
 import com.github.nagromc.nzbgetclient.utils.DownloadUtils;
 
-public class Download {
+import java.util.Observable;
+
+public class Download extends Observable {
 
     /** Total size of the download in bytes */
     protected long totalSize;

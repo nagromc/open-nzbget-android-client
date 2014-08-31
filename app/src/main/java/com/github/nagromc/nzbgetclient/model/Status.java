@@ -1,6 +1,8 @@
 package com.github.nagromc.nzbgetclient.model;
 
-public class Status {
+import java.util.Observable;
+
+public class Status extends Observable {
 
     private GlobalDownloadStatus globalDownloadStatus;
     private Download totalDownload;
@@ -15,6 +17,7 @@ public class Status {
 
     public void setGlobalDownloadStatus(GlobalDownloadStatus globalDownloadStatus) {
         this.globalDownloadStatus = globalDownloadStatus;
+        this.setChanged();
     }
 
     public Download getTotalDownload() {
@@ -23,6 +26,7 @@ public class Status {
 
     public void setTotalDownload(Download totalDownload) {
         this.totalDownload = totalDownload;
+        this.setChanged();
     }
 
     public boolean isDownloading() {

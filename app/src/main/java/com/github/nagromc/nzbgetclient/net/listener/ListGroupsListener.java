@@ -2,6 +2,7 @@ package com.github.nagromc.nzbgetclient.net.listener;
 
 import android.util.Log;
 
+import com.github.nagromc.nzbgetclient.NZBGetContext;
 import com.github.nagromc.nzbgetclient.activity.main.MainActivity;
 import com.github.nagromc.nzbgetclient.activity.main.tab.downloads.DownloadsTabFragment;
 import com.github.nagromc.nzbgetclient.model.Download;
@@ -24,15 +25,15 @@ public class ListGroupsListener extends NzbGetListener<ListGroupsResponseDto.Lis
     public void onResponse(ListGroupsResponseDto.ListGroupsResultDto[] result) {
         Log.d(TAG, "ListGroupsListener.onResponse");
 
-        DownloadsTabFragment downloadsFragment = ((MainActivity) activity).getPagerAdapter().getDownloadsTabFragment();
-
         List<DownloadItem> downloads = new ArrayList<DownloadItem>();
         for (ListGroupsResponseDto.ListGroupsResultDto listGroupsResultDto : result) {
             DownloadItem download = new DownloadItem(listGroupsResultDto);
             downloads.add(download);
         }
 
-        downloadsFragment.refreshDownloads(downloads);
+        NZBGetContext instance = NZBGetContext.getInstance();
+        instance.setDownloads(downloads);
+        instance.notifyObservers();
     }
 
 }

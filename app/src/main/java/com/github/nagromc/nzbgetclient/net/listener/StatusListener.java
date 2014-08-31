@@ -35,11 +35,8 @@ public class StatusListener extends NzbGetListener<StatusResponseDto.StatusResul
         totalDownload.setDownloadedSize(totalSize - statusResultDto.getRemainingSize());
         totalDownload.setRate(statusResultDto.getDownloadRate());
 
-        DownloadsTabFragment downloadsFragment = ((MainActivity) activity).getPagerAdapter().getDownloadsTabFragment();
-        downloadsFragment.refreshFooter(status);
-
-
         status.setGlobalDownloadStatus(GlobalDownloadStatus.fromBoolean(!statusResultDto.isDownloadPaused()));
+        status.notifyObservers();
     }
 
 }
