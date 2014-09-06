@@ -1,7 +1,9 @@
 package com.github.nagromc.nzbgetclient.activity.main.tab.downloads;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 
 import com.github.nagromc.nzbgetclient.NZBGetContext;
 import com.github.nagromc.nzbgetclient.R;
-import com.github.nagromc.nzbgetclient.model.Download;
 import com.github.nagromc.nzbgetclient.model.DownloadItem;
 import com.github.nagromc.nzbgetclient.model.Status;
 import com.github.nagromc.nzbgetclient.utils.NZBGetFormatter;
@@ -70,15 +71,28 @@ public class DownloadsTabFragment extends ListFragment implements Observer {
         progressBar.setProgress(status.getTotalDownload().getPercentage());
     }
 
+    public void refreshActionBar(Status status) {
+        if (status == null || !status.isUpdated()) {
+            return;
+        }
+
+        ActionMenuItemView actionView = (ActionMenuItemView) this.getActivity().findViewById(R.id.action_toggle_pause_resume);
+        Drawable icon = this.getResources().getDrawable(status.getGlobalDownloadStatus().getResourceId());
+        actionView.setIcon(icon);
+    }
+
     @Override
     public void update(Observable observable, Object data) {
         Log.d(TAG, "Update MainActivity");
 
-        // refresh footer
-        this.refreshFooter(NZBGetContext.getInstance().getStatus());
+        NZBGetContext context = (NZBGetContext) observable;
 
+        // refresh action bar
+        this.refreshActionBar(context.getStatus());
+        // refresh footer
+        this.refreshFooter(context.getStatus());
         // refresh download list
-        this.refreshDownloads(NZBGetContext.getInstance().getDownloads());
+        this.refreshDownloads(context.getDownloads());
     }
 
 }

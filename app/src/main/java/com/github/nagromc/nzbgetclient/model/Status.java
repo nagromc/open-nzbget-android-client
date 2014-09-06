@@ -4,6 +4,7 @@ import java.util.Observable;
 
 public class Status extends Observable {
 
+    private boolean isUpdated = false;
     private GlobalDownloadStatus globalDownloadStatus;
     private Download totalDownload;
 
@@ -17,7 +18,7 @@ public class Status extends Observable {
 
     public void setGlobalDownloadStatus(GlobalDownloadStatus globalDownloadStatus) {
         this.globalDownloadStatus = globalDownloadStatus;
-        this.setChanged();
+        setUpdated();
     }
 
     public Download getTotalDownload() {
@@ -26,11 +27,19 @@ public class Status extends Observable {
 
     public void setTotalDownload(Download totalDownload) {
         this.totalDownload = totalDownload;
-        this.setChanged();
+        setUpdated();
     }
 
     public boolean isDownloading() {
         return GlobalDownloadStatus.DOWNLOADING.equals(getGlobalDownloadStatus());
     }
 
+    private void setUpdated() {
+        isUpdated = true;
+        this.setChanged();
+    }
+
+    public boolean isUpdated() {
+        return isUpdated;
+    }
 }
