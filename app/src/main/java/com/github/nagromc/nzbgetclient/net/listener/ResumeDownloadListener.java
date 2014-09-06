@@ -25,10 +25,7 @@ public class ResumeDownloadListener extends NzbGetListener<Boolean> {
 
         Status status = NZBGetContext.getInstance().getStatus();
         status.setGlobalDownloadStatus(GlobalDownloadStatus.fromBoolean(isDownloading));
-
-        ActionMenuItemView actionView = (ActionMenuItemView) this.activity.findViewById(R.id.action_toggle_pause_resume);
-        Drawable icon = activity.getResources().getDrawable(status.getGlobalDownloadStatus().getResourceId());
-        actionView.setIcon(icon);
+        status.notifyObservers(this);
     }
 
 }

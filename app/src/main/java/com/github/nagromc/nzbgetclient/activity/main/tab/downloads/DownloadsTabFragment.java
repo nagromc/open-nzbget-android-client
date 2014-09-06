@@ -17,6 +17,7 @@ import com.github.nagromc.nzbgetclient.model.DownloadItem;
 import com.github.nagromc.nzbgetclient.model.Status;
 import com.github.nagromc.nzbgetclient.net.listener.ListGroupsListener;
 import com.github.nagromc.nzbgetclient.net.listener.PauseDownloadListener;
+import com.github.nagromc.nzbgetclient.net.listener.ResumeDownloadListener;
 import com.github.nagromc.nzbgetclient.net.listener.StatusListener;
 import com.github.nagromc.nzbgetclient.net.volley.NzbGetListener;
 import com.github.nagromc.nzbgetclient.utils.NZBGetFormatter;
@@ -101,7 +102,7 @@ public class DownloadsTabFragment extends ListFragment implements Observer {
         } else if (listenerType instanceof ListGroupsListener) {
             // refresh download list
             this.refreshDownloads(context.getDownloads());
-        } else if (listenerType instanceof PauseDownloadListener) {
+        } else if (listenerType instanceof PauseDownloadListener || listenerType instanceof ResumeDownloadListener) {
             // refresh action bar
             this.refreshActionBar(context.getStatus());
         }
