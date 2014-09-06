@@ -36,7 +36,7 @@ public class StatusListener extends NzbGetListener<StatusResponseDto.StatusResul
         totalDownload.setRate(statusResultDto.getDownloadRate());
 
         status.setGlobalDownloadStatus(GlobalDownloadStatus.fromBoolean(!statusResultDto.isDownloadPaused()));
-        status.notifyObservers();
+        status.notifyObservers(this);
     }
 
 }

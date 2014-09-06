@@ -33,7 +33,7 @@ public class ListGroupsListener extends NzbGetListener<ListGroupsResponseDto.Lis
 
         NZBGetContext instance = NZBGetContext.getInstance();
         instance.setDownloads(downloads);
-        instance.notifyObservers();
+        instance.notifyObservers(this);
     }
 
 }

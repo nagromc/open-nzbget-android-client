@@ -13,8 +13,12 @@ import android.widget.TextView;
 
 import com.github.nagromc.nzbgetclient.NZBGetContext;
 import com.github.nagromc.nzbgetclient.R;
+import com.github.nagromc.nzbgetclient.debug.net.listener.PauseDownloadListener;
 import com.github.nagromc.nzbgetclient.model.DownloadItem;
 import com.github.nagromc.nzbgetclient.model.Status;
+import com.github.nagromc.nzbgetclient.net.listener.ListGroupsListener;
+import com.github.nagromc.nzbgetclient.net.listener.StatusListener;
+import com.github.nagromc.nzbgetclient.net.volley.NzbGetListener;
 import com.github.nagromc.nzbgetclient.utils.NZBGetFormatter;
 
 import java.util.ArrayList;
@@ -87,12 +91,21 @@ public class DownloadsTabFragment extends ListFragment implements Observer {
 
         NZBGetContext context = (NZBGetContext) observable;
 
-        // refresh action bar
-        this.refreshActionBar(context.getStatus());
-        // refresh footer
-        this.refreshFooter(context.getStatus());
-        // refresh download list
-        this.refreshDownloads(context.getDownloads());
+        NzbGetListener listenerType = (NzbGetListener) data;
+
+        if (listenerType instanceof StatusListener) {
+            // refresh action bar
+            this.refreshActionBar(context.getStatus());
+            // refresh footer
+            this.refreshFooter(context.getStatus());
+        } else if (listenerType instanceof ListGroupsListener) {
+            // refresh download list
+            this.refreshDownloads(context.getDownloads());
+        } else if (listenerType instanceof PauseDownloadListener) {
+            // refresh action bar
+            this.refreshActionBar(context.getStatus());
+        }
+
     }
 
 }

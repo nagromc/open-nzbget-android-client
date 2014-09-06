@@ -22,7 +22,7 @@ public class PauseDownloadListener extends NzbGetListener<Boolean> {
 
         Status status = NZBGetContext.getInstance().getStatus();
         status.setGlobalDownloadStatus(GlobalDownloadStatus.fromBoolean(!isPaused));
-        status.notifyObservers();
+        status.notifyObservers(this);
     }
 
 }

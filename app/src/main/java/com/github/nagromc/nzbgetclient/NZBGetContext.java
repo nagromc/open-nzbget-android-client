@@ -35,7 +35,7 @@ public class NZBGetContext extends Observable implements Observer {
     @Override
     public void update(Observable observable, Object data) {
         instance.setChanged();
-        instance.notifyObservers();
+        instance.notifyObservers(data);
     }
 
     public Status getStatus() {
