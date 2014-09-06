@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import com.github.nagromc.nzbgetclient.NZBGetContext;
 import com.github.nagromc.nzbgetclient.R;
-import com.github.nagromc.nzbgetclient.debug.net.listener.PauseDownloadListener;
 import com.github.nagromc.nzbgetclient.model.DownloadItem;
 import com.github.nagromc.nzbgetclient.model.Status;
 import com.github.nagromc.nzbgetclient.net.listener.ListGroupsListener;
+import com.github.nagromc.nzbgetclient.net.listener.PauseDownloadListener;
 import com.github.nagromc.nzbgetclient.net.listener.StatusListener;
 import com.github.nagromc.nzbgetclient.net.volley.NzbGetListener;
 import com.github.nagromc.nzbgetclient.utils.NZBGetFormatter;
